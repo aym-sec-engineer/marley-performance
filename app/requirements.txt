@@ -1,0 +1,4 @@
+# requirements.txt
+flask>=3,<4
+gunicorn>=23,<26
+prometheus-flask-exporter>=0.23,<1

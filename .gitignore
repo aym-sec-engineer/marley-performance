@@ -1,0 +1,27 @@
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Local performance output
+results/*.txt
+results/*.json
+results/*.csv
+
+# Local tooling
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db

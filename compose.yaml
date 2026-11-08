@@ -1,0 +1,45 @@
+
+services:
+  app:
+    build: .
+    environment:
+      WEB_CONCURRENCY: ${WEB_CONCURRENCY:-1}
+    command:
+      - gunicorn
+      - --workers
+      - ${WEB_CONCURRENCY:-1}
+      - --bind
+      - 0.0.0.0:8000
+      - app:app
+    ports:
+      - "127.0.0.1:8000:8000"
+
+  prometheus:
+    image: prom/prometheus:v3.7.3
+    volumes:
+      - ./monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+    ports:
+      - "127.0.0.1:9090:9090"
+    depends_on:
+      - app
+
+  grafana:
+    image: grafana/grafana:12.2.1
+    ports:
+      - "127.0.0.1:3001:3000"
+    depends_on:
+      - prometheus
+    volumes:
+      - grafana-data:/var/lib/grafana
+
+  k6:
+    image: grafana/k6:1.4.2
+    profiles: ["test"]
+    entrypoint: ["k6"]
+    volumes:
+      - ./load-tests:/scripts:ro
+
+volumes:
+  grafana-data:
