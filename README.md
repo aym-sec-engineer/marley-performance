@@ -1,5 +1,7 @@
 ## Performance Engineering
 
+[![Marley Performance CI](https://github.com/aym-sec-engineer/marley-performance/actions/workflows/performance.yml/badge.svg)](https://github.com/aym-sec-engineer/marley-performance/actions/workflows/performance.yml)
+
 Marley Performance est un laboratoire DevPerfOps
 permettant de mesurer les performances d'une API
 Flask/Gunicorn sous charge.
